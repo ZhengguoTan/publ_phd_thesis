@@ -1,0 +1,152 @@
+\documentclass[a4paper,11pt,twoside,openright]{scrbook}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[textfont={},labelfont={bf},format=plain,labelsep=space]{caption}
+\usepackage{geometry}
+\usepackage{amsmath}
+\allowdisplaybreaks
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[flushleft]{threeparttable}
+\usepackage{lipsum}
+\newgeometry{
+  top=2.5cm,
+  bottom=2.0cm,
+  outer=2.5cm,
+  inner=2.0cm,
+}
+
+\setlength{\parindent}{1.5em}
+\linespread{1.5}
+\usepackage{siunitx}
+\sisetup{
+  separate-uncertainty,
+  table-align-uncertainty = true
+}
+\DeclareSIUnit\pixel{pixel}
+\DeclareSIUnit\fps{fps}
+\DeclareSIUnit{\ppm}{ppm}
+
+\usepackage{mathtools} % for more math
+\newcommand*{\norm}[1]{\left\lVert#1\right\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\snr}{SNR}
+
+\usepackage[numbers,compress]{natbib}
+%\usepackage[firstinits=true,natbib=true]{biblatex}
+\usepackage[colorlinks=false,pdfborder={0 0 0},urlcolor=blue,linktocpage=false]{hyperref}
+\usepackage[super]{nth}
+\usepackage[printonlyused]{acronym}
+\usepackage{etaremune}
+\usepackage[capitalise,noabbrev]{cleveref}
+\usepackage{subfig}
+\usepackage[margin=0pt,labelformat=simple,format=hang]{caption}
+\usepackage{textcomp}
+\usepackage[titletoc,title]{appendix}
+
+% ==============================================================
+% Header and Footer
+% ==============================================================
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[R]{\thepage}
+\fancyhead[RE]{\slshape \nouppercase{\leftmark}}
+\fancyhead[LO]{\slshape \nouppercase{\rightmark}}
+\fancyfoot{}
+
+\makeatletter
+\g@addto@macro{\frontmatter}{
+    \renewcommand{\chaptermark}[1]{%
+        \markboth{\thechapter.\thesection.\ #1}{}%
+    }    
+}
+\g@addto@macro{\mainmatter}{
+    \renewcommand{\chaptermark}[1]{%
+        \markboth{\@chapapp\ \thechapter{}.\ #1}{}%
+    }    
+}
+\g@addto@macro{\backmatter}{
+    \renewcommand{\chaptermark}[1]{%
+        \markboth{#1}{}%
+    }    
+}
+\makeatother
+
+% ==============================================================
+ \usepackage{titlesec} % title setting package
+% ==============================================================
+\titleformat{\chapter}[display]
+{\bfseries\Large}
+{\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+{1ex}
+{\titlerule\vspace{1ex}\filleft}
+[\vspace{1ex}\titlerule]
+
+
+
+\begin{document}
+
+
+% ==============================================================
+\frontmatter
+% - title page
+% - dedication
+% - abstract
+% - acknowledgements
+% - table of contents
+% - preface
+% ==============================================================
+% \maketitle
+
+\include{A_01_titlepage}
+\include{A_02_dedication}
+\include{A_03_acknowledgement}
+
+\tableofcontents
+
+% ==============================================================
+\mainmatter
+% - inner chapters
+% - appendices
+% ==============================================================
+\include{B_01_Introduction}
+\include{B_02_MRI}
+\include{B_03_rtMRI}
+\include{B_04_RadialSim}
+\include{B_05_AsymEcho}
+\include{B_06_MIR_PC}
+\include{B_07_MultiEcho}
+\include{B_08_Summ}
+
+%\appendix
+\begin{appendices}
+\include{B_a1_AnalCoil}
+\end{appendices}
+
+% ==============================================================
+\backmatter
+% - bibliography, glossary and index would go here.
+% - list of acronyms
+% - index
+% ==============================================================
+\cleardoublepage
+\bibliographystyle{unsrtnat}
+\refstepcounter{chapter}
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliography{C_Ref}
+%\printbibliography
+
+\chapter{Abbreviations}
+\input{C_abbv}
+
+\chapter{Curriculum Vitae}
+\input{C_myCV}
+
+\chapter{List of Publications}
+\input{C_myPub}
+
+
+\end{document}

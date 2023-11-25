@@ -1,0 +1,44 @@
+\chapter{Analytical Phantoms with Multiple Receiver Coils}
+\label{Chp:AnalCoil}
+
+The magnetic field generated at position $\vec{r}$ by the coil with steady current $I$ is given by Biot-Savart law,
+\begin{equation} \label{Equ:BSlaw}
+  B(\vec{r}) = \frac{\mu_0 I}{4\pi} \oint_{\text{coil}} \frac{d\vec{u} \times (\vec{u} - \vec{r})}{\norm{\vec{u}-\vec{r}}^3}
+\end{equation}
+Therefore, complex coil sensitivity maps can be simulated using \cref{Equ:BSlaw} and the coil geometry. To integrate coil sensitivity maps into analytical Fourier transform, mathematical approximation of the maps are necessary. Because it is well known that coil sensitivity maps are smooth and slowly-varying, so polynomial and sinusoidal models \cite{1999_SENSE,2012_analSim} are commonly used for approximation. 
+
+On the one hand, the sinusoidal model represents the coil sensitivity map with complex exponentials expanding over a range of low spatial frequencies,
+\begin{equation} \label{Equ:coil_sinu}
+  c(\vec{r}) = \sum_{\vec{v}} C_{\vec{v}} \cdot e^{i \vec{r} \cdot \vec{v}}
+\end{equation}
+where $\vec{v}$ is a set of low spatial frequencies used to constrain the smoothness of the coil sensitivity map $c(\vec{v})$, $\vec{r}$ the Cartesian grids within the FOV, and $C_{\vec{v}}$ the coefficients of the complex exponentials. Therefore, plugging \cref{Equ:coil_sinu} into \cref{Equ:cont_FT_rho_coil} yields 
+\begin{equation} \label{Equ:cont_FT_rho_sinu_coil}
+\begin{aligned}
+  y_j(t) 
+  & = \int_{\vec{r}} c_j(\vec{r}) \cdot \rho(\vec{r}) \cdot e^{-i 2\pi \vec{k}(t) \vec{r}} d\vec{r} \\
+  & = \int_{\vec{r}} \sum_{\vec{v}} C_{\vec{v}} \cdot e^{i \vec{r} \cdot \vec{v}} \cdot \rho(\vec{r}) \cdot e^{-i 2\pi \vec{k}(t) \vec{r}} d\vec{r} \\
+  & = \sum_{\vec{v}} C_{\vec{v}} \int_{\vec{r}} \rho(\vec{r}) \cdot e^{-i [2\pi \vec{k}(t) - \vec{v}] \cdot \vec{r}} d\vec{r}
+\end{aligned}
+\end{equation}
+where the integration part is actually a translation of \cref{Equ:sum_aFT_rho}, so the analytical form of \cref{Equ:cont_FT_rho_sinu_coil} is
+\begin{equation} \label{Equ:sum_aFT_rho_coil}
+  y(\vec{k}) = \sum_{m} I_m \sum_{\vec{v}} s_{\vec{v}} \cdot A_m(2\pi \vec{k} - \vec{v})
+\end{equation}
+
+On the ohter hand, for the polynomial model, the coil sensitivity map is approximated by a polynomial function with a degree $D$,
+\begin{equation} \label{Equ:coil_poly}
+  c(\vec{r}) = \sum_{d=0}^{D} \sum_{|\vec{\alpha}|=d} C_{d,\vec{\alpha}} \cdot \vec{r}^{\vec{\alpha}}
+\end{equation}
+where $C_{d,\vec{\alpha}}$ is the coefficients of polynomials, and $\vec{\alpha}$ a two-element vector representing the dimension of FOV. Therefore, \cref{Equ:cont_FT_rho_coil} becomes
+\begin{equation} \label{Equ:cont_FT_rho_poly_coil}
+\begin{aligned}
+  y_j(t) 
+  & = \int_{\vec{r}} c_j(\vec{r}) \cdot \rho(\vec{r}) \cdot e^{-i 2\pi \vec{k}(t) \vec{r}} d\vec{r} \\
+  & = \int_{\vec{r}} \sum_{d=0}^D \sum_{|\vec{\alpha}|=d} C_{d,\vec{\alpha}} \cdot \vec{r}^{\vec{\alpha}} \cdot \rho(\vec{r}) \cdot e^{-i 2\pi \vec{k}(t) \vec{r}} d\vec{r} \\
+  & = \sum_{d=0}^D \sum_{|\vec{\alpha}|=d} C_{d,\vec{\alpha}} \int_{\vec{r}} \vec{r}^{\vec{\alpha}} \cdot \rho(\vec{r}) \cdot e^{-i 2\pi \vec{k}(t) \vec{r}} d\vec{r}
+\end{aligned}
+\end{equation}
+where $\abs{\vec{\alpha}}$ denotes the sum of all elements in the vector $\vec{\alpha}$. As derived in \cite{2012_analSim}, this integration is equivalent to the $\abs{\vec{\alpha}}$-order partial derivatives of the analytical Fourier transform, which can be calculated via the recursive decomposition. 
+
+
+

@@ -1,0 +1,140 @@
+\documentclass[a4paper,11pt,twoside,openright]{scrbook}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[textfont={},labelfont={bf},format=plain,labelsep=space]{caption}
+\usepackage{geometry}
+\usepackage{amsmath}
+\allowdisplaybreaks
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[flushleft]{threeparttable}
+\usepackage{lipsum}
+\newgeometry{
+  top=2.5cm,
+  bottom=2.0cm,
+  outer=2.5cm,
+  inner=2.0cm,
+}
+
+\setlength{\parindent}{1.5em}
+\linespread{1.5}
+\usepackage{siunitx}
+\sisetup{
+  separate-uncertainty,
+  table-align-uncertainty = true
+}
+\DeclareSIUnit\pixel{pixel}
+\DeclareSIUnit\fps{fps}
+\DeclareSIUnit{\ppm}{ppm}
+
+\usepackage{mathtools} % for more math
+\newcommand*{\norm}[1]{\left\lVert#1\right\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\snr}{SNR}
+
+\usepackage[numbers,compress]{natbib}
+%\usepackage[firstinits=true,natbib=true]{biblatex}
+\usepackage[colorlinks=false,pdfborder={0 0 0},urlcolor=blue,linktocpage=false]{hyperref}
+\usepackage[super]{nth}
+\usepackage[printonlyused]{acronym}
+\usepackage{etaremune}
+\usepackage[capitalise,noabbrev]{cleveref}
+\usepackage{subfig}
+\usepackage[margin=0pt,labelformat=simple,format=hang]{caption}
+\usepackage{textcomp}
+\usepackage{appendix}
+
+%\renewcommand\thesubfigure{(\alph{subfigure})}
+
+% ==============================================================
+% Header and Footer
+% ==============================================================
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\slshape \nouppercase{\leftmark}}
+\fancyhead[LO]{\slshape \nouppercase{\rightmark}}
+\fancyfoot{}
+
+\makeatletter
+\g@addto@macro{\frontmatter}{
+    \renewcommand{\chaptermark}[1]{%
+        \markboth{#1}{}%
+    }    
+}
+\g@addto@macro{\mainmatter}{
+    \renewcommand{\chaptermark}[1]{%
+        \markboth{Chapter \thechapter{}. #1}{}%
+    }    
+}
+\g@addto@macro{\backmatter}{
+    \renewcommand{\chaptermark}[1]{%
+        \markboth{#1}{}%
+    }    
+}
+\makeatother
+
+% ==============================================================
+% \usepackage{titletoc}
+% ==============================================================
+% \dottedcontents{section}[3.8em]{}{2.3em}{1pc}
+
+% ==============================================================
+ \usepackage{titlesec} % title setting package
+% ==============================================================
+\titleformat{\chapter}[display]
+{\bfseries\Large}
+{\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+{1ex}
+{\titlerule\vspace{1ex}\filleft}
+[\vspace{1ex}\titlerule]
+
+\begin{document}
+
+\begin{titlepage}
+
+\begin{center}
+
+\vspace*{\fill}
+
+{\bfseries 
+  {\LARGE  
+    Advances in Real-Time Phase-Contrast Flow MRI \\
+    \vspace*{0.25\baselineskip}
+    and Multi-Echo Radial FLASH
+  } 
+}
+
+\vspace{3\baselineskip}
+
+{\Large
+  Dissertation \par 
+  for the award of the degree \par 
+  ``Doctor rerum naturalium" \par 
+  of the Georg-August-Universit\"{a}t G\"{o}ttingen
+
+  \vspace*{2\baselineskip}
+
+  within the doctoral program Physics of Biological and Complex Systems \par 
+  of the Georg-August University School of Science (GAUSS) 
+
+  \vspace*{2\baselineskip}
+  submitted by \par 
+  \vspace*{2\baselineskip}
+  
+  Zhengguo Tan \par 
+  from Guangdong, China
+
+  \vspace*{\fill}
+  G\"{o}ttingen, 2016
+}
+
+\end{center}
+
+\end{titlepage}
+
+
+\end{document}
